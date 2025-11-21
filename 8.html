@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>انواع کلاشینکف در جهان</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #1E1E1E;
+            color: #fff;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        .slide {
+            width: 100%;
+            max-width: 1280px;
+            min-height: 100vh;
+            height: auto;
+            position: relative;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.95) 0%, rgba(30, 30, 30, 0.85) 100%);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.15;
+            z-index: -1;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        .title {
+            font-size: clamp(30px, 5vw, 40px);
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #C7A46C;
+            line-height: 1.2;
+        }
+        .accent-line {
+            width: 80px;
+            height: 3px;
+            background-color: #C7A46C;
+            margin-bottom: 30px;
+        }
+        .text {
+            font-size: clamp(16px, 2vw, 20px);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .highlight {
+            color: #C7A46C;
+            font-weight: 700;
+        }
+        .variants-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            flex-grow: 1;
+        }
+        .variant-card {
+            background-color: rgba(199, 164, 108, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+        .variant-card:hover {
+            transform: translateY(-5px);
+            background-color: rgba(199, 164, 108, 0.2);
+        }
+        .variant-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .variant-icon {
+            background-color: rgba(199, 164, 108, 0.2);
+            color: #C7A46C;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        .variant-title {
+            font-size: clamp(18px, 3vw, 22px);
+            font-weight: 700;
+            color: #C7A46C;
+        }
+        .variant-country {
+            font-size: clamp(14px, 2vw, 16px);
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .variant-content {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            flex-grow: 1;
+        }
+        .variant-features {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: clamp(14px, 2vw, 18px);
+        }
+        .feature-icon {
+            color: #C7A46C;
+            font-size: 20px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+        .variant-image {
+            width: 100%;
+            height: 150px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            margin-top: auto;
+        }
+        .variant-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .info-box {
+            background-color: rgba(199, 164, 108, 0.15);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .info-icon {
+            color: #C7A46C;
+            font-size: 40px;
+            flex-shrink: 0;
+        }
+        .info-text {
+            font-size: clamp(14px, 2vw, 18px);
+            line-height: 1.6;
+        }
+        .navigation {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        .nav-button {
+            background-color: rgba(199, 164, 108, 0.9);
+            color: #1E1E1E;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        .nav-button:hover {
+            transform: scale(1.1);
+            background-color: rgba(199, 164, 108, 1);
+        }
+        @media (max-width: 768px) {
+            .slide {
+                padding: 15px;
+            }
+            .content {
+                padding: 15px;
+            }
+            .title {
+                margin-bottom: 20px;
+            }
+            .accent-line {
+                margin-bottom: 20px;
+            }
+            .variants-grid {
+                grid-template-columns: 1fr;
+            }
+            .navigation {
+                bottom: 10px;
+                right: 10px;
+            }
+            .nav-button {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <img src="https://sfile.chatglm.cn/images-ppt/e89ad42815e4.jpg" alt="انواع کلاشینکف در جهان" class="background-image">
+        <div class="content">
+            <h1 class="title">انواع کلاشینکف در جهان</h1>
+            <div class="accent-line"></div>
+            <p class="text">طراحی فوق‌العاده ساده کلاشینکف باعث شد تقریباً هر کشوری که کارخانه اسلحه‌سازی داشت، نسخه خودش را بسازد؛ گاهی با مجوز روسیه و گاهی بدون مجوز!</p>
+            
+            <div class="variants-grid">
+                <div class="variant-card">
+                    <div class="variant-header">
+                        <div class="variant-icon">
+                            <i class="material-icons">public</i>
+                        </div>
+                        <div>
+                            <div class="variant-title">Type 56</div>
+                            <div class="variant-country">چین</div>
+                        </div>
+                    </div>
+                    <div class="variant-content">
+                        <div class="variant-features">
+                            <div class="feature-item">
+                                <i class="material-icons feature-icon">check_circle</i>
+                                <span>بزرگ‌ترین تولیدکننده کلاشینکف</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="material-icons feature-icon">check_circle</i>
+                                <span>خیلی شبیه AKM است</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="material-icons feature-icon">check_circle</i>
+                                <span>سرنیزه تاشوی ثابت روی لوله</span>
+                            </div>
+                        </div>
+                        <div class="variant-image">
+                            <img src="https://sfile.chatglm.cn/images-ppt/96594a33f2b0.jpg" alt="Type 56 چینی">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="variant-card">
+                    <div class="variant-header">
+                        <div class="variant-icon">
+                            <i class="material-icons">engineering</i>
+                        </div>
+                        <div>
+                            <div class="variant-title">MPi-KM</div>
+                            <div class="variant-country">آلمان شرقی</div>
+                        </div>
+                    </div>
+                    <div class="variant-content">
+                        <div class="variant-features">
+                            <div class="feature-item">
+                                <i class="material-icons feature-icon">check_circle</i>
+                                <span>ساخته شده با دقت آلمانی</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="material-icons feature-icon">check_circle</i>
+                                <span>کیفیت ساخت بالا</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="material-icons feature-icon">check_circle</i>
+                                <span>مورد علاقه مجموعه‌داران</span>
+                            </div>
+                        </div>
+                        <div class="variant-image">
+                            <img src="https://sfile.chatglm.cn/images-ppt/f066cc858959.jpg" alt="MPi-KM آلمان شرقی">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="variant-card">
+                    <div class="variant-header">
+                        <div class="variant-icon">
+                            <i class="material-icons">military_tech</i>
+                        </div>
+                        <div>
+                            <div class="variant-title">PM md.63/65</div>
+                            <div class="variant-country">رومانی</div>
+                        </div>
+                    </div>
+                    <div class="variant-content">
+                        <div class="variant-features">
+                            <div class="feature-item">
+                                <i class="material-icons feature-icon">check_circle</i>
+                                <span>خشاب‌های شیاردار مخصوص</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="material-icons feature-icon">check_circle</i>
+                                <span>صدای شلیک خاص و بلند</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="material-icons feature-icon">check_circle</i>
+                                <span>قنداق چوبی خاص</span>
+                            </div>
+                        </div>
+                        <div class="variant-image">
+                            <img src="https://sfile.chatglm.cn/images-ppt/1ff3691fef71.jpg" alt="PM md.63/65 رومانی">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="variant-card">
+                    <div class="variant-header">
+                        <div class="variant-icon">
+                            <i class="material-icons">shield</i>
+                        </div>
+                        <div>
+                            <div class="variant-title">Zastava M70</div>
+                            <div class="variant-country">یوگسلاوی (صربستان)</div>
+                        </div>
+                    </div>
+                    <div class="variant-content">
+                        <div class="variant-features">
+                            <div class="feature-item">
+                                <i class="material-icons feature-icon">check_circle</i>
+                                <span>لوله و قطعات ضخیم‌تر</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="material-icons feature-icon">check_circle</i>
+                                <span>بسیار مقاوم در جنگ‌های بالکان</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="material-icons feature-icon">check_circle</i>
+                                <span>دقیق‌تر از مدل‌های دیگر</span>
+                            </div>
+                        </div>
+                        <div class="variant-image">
+                            <img src="https://sfile.chatglm.cn/images-ppt/0a50d8a7e6a4.jpg" alt="Zastava M70 یوگسلاوی">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="variant-card">
+                    <div class="variant-header">
+                        <div class="variant-icon">
+                            <i class="material-icons">account_balance</i>
+                        </div>
+                        <div>
+                            <div class="variant-title">Maadi Misr</div>
+                            <div class="variant-country">مصر</div>
+                        </div>
+                    </div>
+                    <div class="variant-content">
+                        <div class="variant-features">
+                            <div class="feature-item">
+                                <i class="material-icons feature-icon">check_circle</i>
+                                <span>کیفیت قابل قبول</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="material-icons feature-icon">check_circle</i>
+                                <span>قیمت خیلی پایین</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="material-icons feature-icon">check_circle</i>
+                                <span>تولید انبوه برای خاورمیانه</span>
+                            </div>
+                        </div>
+                        <div class="variant-image">
+                            <img src="https://sfile.chatglm.cn/images-ppt/48411c101931.jpg" alt="Maadi Misr مصر">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="variant-card">
+                    <div class="variant-header">
+                        <div class="variant-icon">
+                            <i class="material-icons">flag</i>
+                        </div>
+                        <div>
+                            <div class="variant-title">KLS, KLF, KLT</div>
+                            <div class="variant-country">ایران</div>
+                        </div>
+                    </div>
+                    <div class="variant-content">
+                        <div class="variant-features">
+                            <div class="feature-item">
+                                <i class="material-icons feature-icon">check_circle</i>
+                                <span>کاملاً در داخل ساخته می‌شود</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="material-icons feature-icon">check_circle</i>
+                                <span>KLS: قنداق ثابت</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="material-icons feature-icon">check_circle</i>
+                                <span>KLF: تاشو از زیر، KLT: تاشو از بغل</span>
+                            </div>
+                        </div>
+                        <div class="variant-image">
+                            <img src="https://sfile.chatglm.cn/images-ppt/6a8b8e63d049.jpg" alt="کلاشینکف ایرانی">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <i class="material-icons info-icon">lightbulb</i>
+                <div class="info-text">
+                    اگر با دقت نگاه کنید، تقریباً در هر گوشه دنیا یک کارخانه کلاشینکف دارید! طراحی ساده و کارآمد آن باعث شده کشورهای مختلف بتوانند آن را با امکانات محدود خود تولید کنند.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="navigation">
+        <button class="nav-button" onclick="location.href='7.html'">
+            <i class="material-icons">arrow_back</i>
+        </button>
+        <button class="nav-button" onclick="location.href='9.html'">
+            <i class="material-icons">arrow_forward</i>
+        </button>
+    </div>
+</body>
+</html>

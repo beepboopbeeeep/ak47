@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تاریخچه و طراح</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #1E1E1E;
+            color: #fff;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        .slide {
+            width: 100%;
+            max-width: 1280px;
+            min-height: 100vh;
+            height: auto;
+            position: relative;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.95) 0%, rgba(30, 30, 30, 0.85) 100%);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.15;
+            z-index: -1;
+        }
+        .content {
+            display: flex;
+            flex-grow: 1;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+            flex-direction: column;
+        }
+        .left-content {
+            flex: 1;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+        .right-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+        .title {
+            font-size: clamp(30px, 5vw, 40px);
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #C7A46C;
+            line-height: 1.2;
+        }
+        .accent-line {
+            width: 80px;
+            height: 3px;
+            background-color: #C7A46C;
+            margin-bottom: 30px;
+        }
+        .text {
+            font-size: clamp(16px, 2vw, 20px);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .highlight {
+            color: #C7A46C;
+            font-weight: 700;
+        }
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .event {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        .event-icon {
+            color: #C7A46C;
+            font-size: 24px;
+            margin-top: 2px;
+        }
+        .event-content {
+            flex: 1;
+        }
+        .event-year {
+            font-size: clamp(18px, 3vw, 22px);
+            font-weight: 700;
+            color: #C7A46C;
+            margin-bottom: 5px;
+        }
+        .event-text {
+            font-size: clamp(14px, 2vw, 18px);
+            line-height: 1.5;
+        }
+        .image-container {
+            width: 100%;
+            max-width: 500px;
+            height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .quote {
+            font-size: clamp(14px, 2vw, 18px);
+            font-style: italic;
+            color: #C7A46C;
+            text-align: center;
+            padding: 0 20px;
+            line-height: 1.6;
+            position: relative;
+        }
+        .quote::before, .quote::after {
+            content: '"';
+            font-size: clamp(20px, 4vw, 40px);
+            position: absolute;
+            color: rgba(199, 164, 108, 0.3);
+        }
+        .quote::before {
+            top: -15px;
+            right: 0;
+        }
+        .quote::after {
+            bottom: -30px;
+            left: 0;
+        }
+        .design-principles {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        .principle {
+            background-color: rgba(199, 164, 108, 0.15);
+            border-right: 3px solid #C7A46C;
+            padding: 10px 15px;
+            border-radius: 0 5px 5px 0;
+            font-size: clamp(14px, 2vw, 18px);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .principle-icon {
+            color: #C7A46C;
+            font-size: 20px;
+        }
+        .navigation {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        .nav-button {
+            background-color: rgba(199, 164, 108, 0.9);
+            color: #1E1E1E;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        .nav-button:hover {
+            transform: scale(1.1);
+            background-color: rgba(199, 164, 108, 1);
+        }
+        @media (min-width: 768px) {
+            .content {
+                flex-direction: row;
+            }
+            .left-content {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            .right-content {
+                margin-top: 0;
+            }
+            .image-container {
+                width: 90%;
+                height: 50%;
+                margin-bottom: 30px;
+            }
+        }
+        @media (max-width: 768px) {
+            .slide {
+                padding: 15px;
+            }
+            .content {
+                padding: 15px;
+            }
+            .left-content, .right-content {
+                padding: 10px;
+            }
+            .title {
+                margin-bottom: 20px;
+            }
+            .accent-line {
+                margin-bottom: 20px;
+            }
+            .navigation {
+                bottom: 10px;
+                right: 10px;
+            }
+            .nav-button {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <img src="https://sfile.chatglm.cn/images-ppt/53d5d0509cd4.jpg" alt="طراحی کلاشینکف" class="background-image">
+        <div class="content">
+            <div class="left-content">
+                <h1 class="title">تاریخچه و طراح</h1>
+                <div class="accent-line"></div>
+                <p class="text"><span class="highlight">میخائیل تیموفیویچ کلاشینکف</span> در سال ۱۹۱۹ در روسیه به دنیا آمد. او از کودکی عاشق ساختن چیزهای مکانیکی بود، اما زندگی‌اش با جنگ جهانی دوم تغییر کرد.</p>
+                
+                <div class="timeline">
+                    <div class="event">
+                        <i class="material-icons event-icon">military_tech</i>
+                        <div class="event-content">
+                            <div class="event-year">۱۹۴۱</div>
+                            <div class="event-text">به عنوان خدمه تانک به جبهه رفت و شدیداً زخمی شد</div>
+                        </div>
+                    </div>
+                    <div class="event">
+                        <i class="material-icons event-icon">psychology</i>
+                        <div class="event-content">
+                            <div class="event-year">بیمارستان</div>
+                            <div class="event-text">صدای شکایت سربازان از سلاح‌های قدیمی و غیرقابل اعتماد شوروی را شنید</div>
+                        </div>
+                    </div>
+                    <div class="event">
+                        <i class="material-icons event-icon">engineering</i>
+                        <div class="event-content">
+                            <div class="event-year">۱۹۴۷</div>
+                            <div class="event-text">نمونه نهایی AK-47 آماده شد</div>
+                        </div>
+                    </div>
+                    <div class="event">
+                        <i class="material-icons event-icon">verified</i>
+                        <div class="event-content">
+                            <div class="event-year">۱۹۴۹</div>
+                            <div class="event-text">ارتش شوروی آن را پذیرفت و تولید انبوه آغاز شد</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right-content">
+                <div class="image-container">
+                    <img src="https://sfile.chatglm.cn/images-ppt/4cf6403a14e2.jpg" alt="میخائیل کلاشینکف با AK-47">
+                </div>
+                
+                <div class="design-principles">
+                    <div class="principle">
+                        <i class="material-icons principle-icon">settings</i>
+                        <span>سادگی</span>
+                    </div>
+                    <div class="principle">
+                        <i class="material-icons principle-icon">build</i>
+                        <span>قابلیت اطمینان</span>
+                    </div>
+                    <div class="principle">
+                        <i class="material-icons principle-icon">bolt</i>
+                        <span>ارزانی</span>
+                    </div>
+                </div>
+                
+                <div class="quote">
+                    من این سلاح را برای دفاع از کشورم ساختم، نه برای کشتن مردم بی‌گناه.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="navigation">
+        <button class="nav-button" onclick="location.href='2.html'">
+            <i class="material-icons">arrow_back</i>
+        </button>
+        <button class="nav-button" onclick="location.href='4.html'">
+            <i class="material-icons">arrow_forward</i>
+        </button>
+    </div>
+</body>
+</html>

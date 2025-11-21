@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خشاب‌ها و لوازم جانبی</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #1E1E1E;
+            color: #fff;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        .slide {
+            width: 100%;
+            max-width: 1280px;
+            min-height: 100vh;
+            height: auto;
+            position: relative;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.95) 0%, rgba(30, 30, 30, 0.85) 100%);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.15;
+            z-index: -1;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        .title {
+            font-size: clamp(30px, 5vw, 40px);
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #C7A46C;
+            line-height: 1.2;
+        }
+        .accent-line {
+            width: 80px;
+            height: 3px;
+            background-color: #C7A46C;
+            margin-bottom: 30px;
+        }
+        .text {
+            font-size: clamp(16px, 2vw, 20px);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .highlight {
+            color: #C7A46C;
+            font-weight: 700;
+        }
+        .accessories-container {
+            display: flex;
+            gap: 30px;
+            flex-grow: 1;
+            flex-direction: column;
+        }
+        .left-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .right-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .accessory-card {
+            background-color: rgba(199, 164, 108, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            transition: transform 0.3s ease;
+        }
+        .accessory-card:hover {
+            transform: translateY(-5px);
+            background-color: rgba(199, 164, 108, 0.2);
+        }
+        .accessory-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .accessory-icon {
+            background-color: rgba(199, 164, 108, 0.2);
+            color: #C7A46C;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        .accessory-title {
+            font-size: clamp(18px, 3vw, 22px);
+            font-weight: 700;
+            color: #C7A46C;
+        }
+        .accessory-content {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            flex-grow: 1;
+        }
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: clamp(14px, 2vw, 18px);
+        }
+        .feature-icon {
+            color: #C7A46C;
+            font-size: 20px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+        .magazine-types {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        .magazine-type {
+            background-color: rgba(199, 164, 108, 0.15);
+            border-radius: 8px;
+            padding: 10px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            min-width: 80px;
+        }
+        .magazine-count {
+            font-size: clamp(20px, 3vw, 24px);
+            font-weight: 700;
+            color: #C7A46C;
+        }
+        .magazine-name {
+            font-size: clamp(12px, 2vw, 16px);
+            text-align: center;
+        }
+        .modern-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .modern-feature {
+            background-color: rgba(199, 164, 108, 0.15);
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .modern-feature-icon {
+            color: #C7A46C;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        .modern-feature-text {
+            font-size: clamp(12px, 2vw, 16px);
+        }
+        .image-container {
+            width: 100%;
+            height: 160px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            margin-top: auto;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .note-box {
+            background-color: rgba(199, 164, 108, 0.15);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .note-icon {
+            color: #C7A46C;
+            font-size: 30px;
+            flex-shrink: 0;
+        }
+        .note-text {
+            font-size: clamp(14px, 2vw, 18px);
+            line-height: 1.5;
+        }
+        .navigation {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        .nav-button {
+            background-color: rgba(199, 164, 108, 0.9);
+            color: #1E1E1E;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        .nav-button:hover {
+            transform: scale(1.1);
+            background-color: rgba(199, 164, 108, 1);
+        }
+        @media (min-width: 768px) {
+            .accessories-container {
+                flex-direction: row;
+            }
+        }
+        @media (max-width: 768px) {
+            .slide {
+                padding: 15px;
+            }
+            .content {
+                padding: 15px;
+            }
+            .title {
+                margin-bottom: 20px;
+            }
+            .accent-line {
+                margin-bottom: 20px;
+            }
+            .navigation {
+                bottom: 10px;
+                right: 10px;
+            }
+            .nav-button {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <img src="https://sfile.chatglm.cn/images-ppt/7b92a038ee9a.jpg" alt="کلاشینکف با خشاب" class="background-image">
+        <div class="content">
+            <h1 class="title">خشاب‌ها و لوازم جانبی</h1>
+            <div class="accent-line"></div>
+            <p class="text">با مدرن شدن جنگ، کلاشینکف هم آپدیت شد. امروزه این سلاح ۷۰ ساله هنوز هم در میدان نبرد مدرن کاملاً به‌روز و خطرناک است.</p>
+            
+            <div class="accessories-container">
+                <div class="left-section">
+                    <div class="accessory-card">
+                        <div class="accessory-header">
+                            <div class="accessory-icon">
+                                <i class="material-icons">inventory_2</i>
+                            </div>
+                            <div class="accessory-title">خشاب‌ها</div>
+                        </div>
+                        <div class="accessory-content">
+                            <div class="feature-list">
+                                <div class="feature-item">
+                                    <i class="material-icons feature-icon">check_circle</i>
+                                    <span>خشاب معروف <span class="highlight">خمیده نارنجی یا مشکی ۳۰ تیری</span></span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="material-icons feature-icon">check_circle</i>
+                                    <span>شکل خمیده برای جلوگیری از گیر کردن فشنگ نوک‌تیز</span>
+                                </div>
+                            </div>
+                            
+                            <div class="magazine-types">
+                                <div class="magazine-type">
+                                    <div class="magazine-count">30</div>
+                                    <div class="magazine-name">استاندارد</div>
+                                </div>
+                                <div class="magazine-type">
+                                    <div class="magazine-count">40</div>
+                                    <div class="magazine-name">افزایش ظرفیت</div>
+                                </div>
+                                <div class="magazine-type">
+                                    <div class="magazine-count">75</div>
+                                    <div class="magazine-name">درام (طبل)</div>
+                                </div>
+                            </div>
+                            
+                            <div class="image-container">
+                                <img src="https://sfile.chatglm.cn/images-ppt/a2d556c73dbf.jpg" alt="خشاب‌های کلاشینکف">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="right-section">
+                    <div class="accessory-card">
+                        <div class="accessory-header">
+                            <div class="accessory-icon">
+                                <i class="material-icons">hardware</i>
+                            </div>
+                            <div class="accessory-title">لوازم جانبی مدرن</div>
+                        </div>
+                        <div class="accessory-content">
+                            <div class="feature-list">
+                                <div class="feature-item">
+                                    <i class="material-icons feature-icon">check_circle</i>
+                                    <span>زیر لوله می‌توانید <span class="highlight">نارنجک‌انداز GP-25 یا GP-30</span> نصب کنید</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="material-icons feature-icon">check_circle</i>
+                                    <span>روی بدنه مدل‌های جدید چهار ریل برای نصب تجهیزات</span>
+                                </div>
+                            </div>
+                            
+                            <div class="modern-features">
+                                <div class="modern-feature">
+                                    <i class="material-icons modern-feature-icon">nights_stay</i>
+                                    <div class="modern-feature-text">دوربین دید در شب</div>
+                                </div>
+                                <div class="modern-feature">
+                                    <i class="material-icons modern-feature-icon">flashlight_on</i>
+                                    <div class="modern-feature-text">چراغ قوه تاکتیکی</div>
+                                </div>
+                                <div class="modern-feature">
+                                    <i class="material-icons modern-feature-icon">gps_fixed</i>
+                                    <div class="modern-feature-text">لیزر نشانه‌رو</div>
+                                </div>
+                                <div class="modern-feature">
+                                    <i class="material-icons modern-feature-icon">volume_off</i>
+                                    <div class="modern-feature-text">سایلنسر مخصوص</div>
+                                </div>
+                            </div>
+                            
+                            <div class="image-container">
+                                <img src="https://sfile.chatglm.cn/images-ppt/6731595a7744.jpg" alt="کلاشینکف با لوازم جانبی">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="note-box">
+                <i class="material-icons note-icon">lightbulb</i>
+                <div class="note-text">
+                    یک سلاح ۷۰ ساله هنوز هم در میدان نبرد مدرن کاملاً به‌روز و خطرناک است.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="navigation">
+        <button class="nav-button" onclick="location.href='8.html'">
+            <i class="material-icons">arrow_back</i>
+        </button>
+        <button class="nav-button" onclick="location.href='10.html'">
+            <i class="material-icons">arrow_forward</i>
+        </button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>واژه‌نامه</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #1E1E1E;
+            color: #fff;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        .slide {
+            width: 100%;
+            max-width: 1280px;
+            min-height: 100vh;
+            height: auto;
+            position: relative;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.95) 0%, rgba(30, 30, 30, 0.85) 100%);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.15;
+            z-index: -1;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        .title {
+            font-size: clamp(30px, 5vw, 40px);
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #C7A46C;
+            line-height: 1.2;
+        }
+        .accent-line {
+            width: 80px;
+            height: 3px;
+            background-color: #C7A46C;
+            margin-bottom: 30px;
+        }
+        .dictionary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            flex-grow: 1;
+        }
+        .dictionary-card {
+            background-color: rgba(199, 164, 108, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+        .dictionary-card:hover {
+            transform: translateY(-5px);
+            background-color: rgba(199, 164, 108, 0.2);
+        }
+        .term-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .term-icon {
+            background-color: rgba(199, 164, 108, 0.2);
+            color: #C7A46C;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        .term-title {
+            font-size: clamp(18px, 3vw, 22px);
+            font-weight: 700;
+            color: #C7A46C;
+        }
+        .term-content {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            flex-grow: 1;
+        }
+        .term-definition {
+            font-size: clamp(14px, 2vw, 18px);
+            line-height: 1.6;
+        }
+        .term-example {
+            font-size: clamp(12px, 1.5vw, 16px);
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.8);
+            padding-right: 15px;
+            border-right: 3px solid #C7A46C;
+        }
+        
+        /* Team section styles */
+        .team-section {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(199, 164, 108, 0.3);
+        }
+        
+        .team-title {
+            font-size: clamp(24px, 4vw, 32px);
+            font-weight: 700;
+            color: #C7A46C;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .team-card {
+            background-color: rgba(199, 164, 108, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-5px);
+            background-color: rgba(199, 164, 108, 0.2);
+        }
+        
+        .team-role {
+            font-size: clamp(18px, 3vw, 22px);
+            font-weight: 700;
+            color: #C7A46C;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .team-member {
+            font-size: clamp(14px, 2vw, 18px);
+            padding: 8px 0;
+            padding-right: 20px;
+            position: relative;
+        }
+        
+        .team-member:before {
+            content: "•";
+            color: #C7A46C;
+            font-size: 24px;
+            position: absolute;
+            right: 5px;
+            top: 5px;
+        }
+        
+        .navigation {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        .nav-button {
+            background-color: rgba(199, 164, 108, 0.9);
+            color: #1E1E1E;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        .nav-button:hover {
+            transform: scale(1.1);
+            background-color: rgba(199, 164, 108, 1);
+        }
+        .home-button {
+            background-color: rgba(199, 164, 108, 0.9);
+            color: #1E1E1E;
+            border: none;
+            border-radius: 30px;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            font-family: 'Vazirmatn', sans-serif;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        .home-button:hover {
+            transform: scale(1.05);
+            background-color: rgba(199, 164, 108, 1);
+        }
+        
+        /* Add bottom padding to prevent content overlap */
+        .bottom-padding {
+            height: 100px;
+        }
+        
+        @media (max-width: 768px) {
+            .slide {
+                padding: 15px;
+            }
+            .content {
+                padding: 15px;
+            }
+            .title {
+                margin-bottom: 20px;
+            }
+            .accent-line {
+                margin-bottom: 20px;
+            }
+            .dictionary-grid {
+                grid-template-columns: 1fr;
+            }
+            .navigation {
+                bottom: 10px;
+                right: 10px;
+            }
+            .nav-button {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+            .bottom-padding {
+                height: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <img src="https://sfile.chatglm.cn/test/placeholder.jpg" alt="واژه‌نامه" class="background-image">
+        <div class="content">
+            <h1 class="title">واژه‌نامه</h1>
+            <div class="accent-line"></div>
+            
+            <div class="dictionary-grid">
+                <div class="dictionary-card">
+                    <div class="term-header">
+                        <div class="term-icon">
+                            <i class="material-icons">local_fire_department</i>
+                        </div>
+                        <div class="term-title">AK-47</div>
+                    </div>
+                    <div class="term-content">
+                        <div class="term-definition">
+                            مدل اولیه کلاشینکف که در سال 1947 طراحی شد. عدد 47 از سال طراحی گرفته شده است.
+                        </div>
+                        <div class="term-example">
+                            "کلاشینکف با قنداق چوبی و خشاب خمیده‌اش در جنگ‌های مختلف استفاده می‌شد."
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dictionary-card">
+                    <div class="term-header">
+                        <div class="term-icon">
+                            <i class="material-icons">bolt</i>
+                        </div>
+                        <div class="term-title">AKM</div>
+                    </div>
+                    <div class="term-content">
+                        <div class="term-definition">
+                            نسخه بهبود یافته AK-47 که در سال 1959 معرفی شد. وزن سبک‌تر و تولید انبوه آسان‌تر.
+                        </div>
+                        <div class="term-example">
+                            "AKM با قنداق چوبی و لوله مهرشده بیشتر در دهه 1960 رایج شد."
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dictionary-card">
+                    <div class="term-header">
+                        <div class="term-icon">
+                            <i class="material-icons">settings</i>
+                        </div>
+                        <div class="term-title">AK-74</div>
+                    </div>
+                    <div class="term-content">
+                        <div class="term-definition">
+                            نسل سوم کلاشینکف که از فشنگ 5.45×39mm استفاده می‌کند. جایگزین AKM در ارتش شوروی شد.
+                        </div>
+                        <div class="term-example">
+                            "AK-74 با فشنگ کوچک‌تر و سریع‌تر در افغانستان استفاده شد."
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dictionary-card">
+                    <div class="term-header">
+                        <div class="term-icon">
+                            <i class="material-icons">swap_horiz</i>
+                        </div>
+                        <div class="term-title">قنداق تاشو</div>
+                    </div>
+                    <div class="term-content">
+                        <div class="term-definition">
+                            قنداقی که می‌توان آن را جمع کرد تا سلاح جمع‌وجورتر شود. انواع مختلفی دارد.
+                        </div>
+                        <div class="term-example">
+                            "نیروهای چترباز ترجیح می‌دهند از قنداق تاشو استفاده کنند."
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dictionary-card">
+                    <div class="term-header">
+                        <div class="term-icon">
+                            <i class="material-icons">inventory_2</i>
+                        </div>
+                        <div class="term-title">خشاب</div>
+                    </div>
+                    <div class="term-content">
+                        <div class="term-definition">
+                            ظرفی که فشنگ‌ها در آن نگهداری می‌شوند. در کلاشینکف معمولاً 30 عدد فشنگ جا می‌دهد.
+                        </div>
+                        <div class="term-example">
+                            "خشاب خمیده کلاشینکف از گیر کردن فشنگ‌ها جلوگیری می‌کند."
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dictionary-card">
+                    <div class="term-header">
+                        <div class="term-icon">
+                            <i class="material-icons">military_tech</i>
+                        </div>
+                        <div class="term-title">سرنیزه</div>
+                    </div>
+                    <div class="term-content">
+                        <div class="term-definition">
+                            تیغی که به انتهای لوله سلاح متصل می‌شود و در مواقع نبرد تن‌به‌تن استفاده می‌شود.
+                        </div>
+                        <div class="term-example">
+                            "کلاشینکف از ابتدا طوری طراحی شد که سرنیزه روی آن نصب شود."
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="team-section">
+                <h2 class="team-title">تیم پروژه</h2>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-role">
+                            <i class="material-icons">group</i>
+                            نویسندگان
+                        </div>
+                        <div class="team-member">محمدرضا آقایی</div>
+                        <div class="team-member">علیرضا اصغریان</div>
+                        <div class="team-member">امیرمهدی باقری</div>
+                        <div class="team-member">امیرمحمد چیره</div>
+                        <div class="team-member">امیرمحمد جهانفری</div>
+                    </div>
+                    
+                    <div class="team-card">
+                        <div class="team-role">
+                            <i class="material-icons">edit</i>
+                            ویراستار و ارائه‌دهنده
+                        </div>
+                        <div class="team-member">علیرضا اصغریان</div>
+                    </div>
+                    
+                    <div class="team-card">
+                        <div class="team-role">
+                            <i class="material-icons">school</i>
+                            استاد محترم
+                        </div>
+                        <div class="team-member">جناب آقای احمد کیهانی</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Add bottom padding to prevent overlap with navigation buttons -->
+            <div class="bottom-padding"></div>
+        </div>
+    </div>
+    
+    <div class="navigation">
+        <button class="nav-button" onclick="location.href='12.html'">
+            <i class="material-icons">arrow_back</i>
+        </button>
+        <button class="home-button" onclick="location.href='index.html'">
+            <i class="material-icons">home</i>
+            <span>بازگشت به خانه</span>
+        </button>
+    </div>
+</body>
+</html>
